@@ -24,11 +24,9 @@ export default {
     },
 
     fonts: {
-        primary_400: 'Inter_400Regular',
-        primary_500:'Inter_500Medium',
-
-        secondary_400: 'Archivo_400Regular',
-        secondary_500: 'Archivo_500Medium',
-        secondary_600: 'Archivo_600SemiBold'
+        primary_400: 'Roboto_400Regular,',
+        primary_500: 'Roboto_500Medium',
+        primary_700: 'Roboto_700Bold',
+        
     }
 }

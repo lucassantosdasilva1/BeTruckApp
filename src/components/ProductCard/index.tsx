@@ -1,4 +1,5 @@
 import React from 'react';
+import { Rating } from 'react-native-ratings';
 
 import {
   Container,
@@ -14,11 +15,14 @@ import {
   WrapDescription,
   Description,
   WrapRatingPrice,
-  Rating,
+  WrapRate,
   Price,
+  RateComponent,
 } from './styles';
 
 export function ProductCard() {
+  const arrai = new Array(5);
+  const [rating, setRating] = React.useState([]);
 
   const Data = {
     title: "Brown eggs",
@@ -28,7 +32,7 @@ export function ProductCard() {
     height: 600,
     width: 400,
     price: 28.1,
-    rating: 4
+    rate: 4
 
   }
 
@@ -65,13 +69,20 @@ export function ProductCard() {
 
 
         <WrapRatingPrice>
-          
-            <Rating>
-              {Data.rating}
-            </Rating>
+            <WrapRate>
+              {
+                
+                function nome() {
+                    for(let i = 0; i < 6; i++) {
+                      <RateComponent name='star' size={24} color='black'/>
+                    }
+                }             
+                
+              }
+            </WrapRate>
 
             <Price>
-              {Data.price}
+              R$ {Data.price}
             </Price>
           
         </WrapRatingPrice>
