@@ -1,15 +1,15 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 
-import { Container } from './styles';
+import { Container, Logo } from './styles';
 
 
 export function Header(){
     return (
         <Container>
             <View>
-                <Text category='h6' appearance='alternative'>BeTruckAPP</Text>
+                <Logo source={require('../../assets/betrucklogo.png')}/>
             </View>
         </Container>
     )

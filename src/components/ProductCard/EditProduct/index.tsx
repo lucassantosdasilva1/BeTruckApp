@@ -1,4 +1,9 @@
+import { Divider } from '@ui-kitten/components';
 import React, { useEffect, useState } from 'react';
+
+import * as Updates from 'expo-updates';
+import { NativeModules } from "react-native";
+
 import { EditProps, sendEditProduct } from '../../../services';
 
 // import { Question } from '../CreatePost/styles';
@@ -8,10 +13,11 @@ import { EditProps, sendEditProduct } from '../../../services';
 import {
   Container,
   ContainerPostCreation,
-  TitleWrap,
+  Body,
+  Header,
+  TitleHeader,
   ContentWrap,
   Label,
-  TitleInput,
   ContentInput,
   Footer,
   Button,
@@ -36,33 +42,65 @@ export function EditProduct({ id, title, type, price, closeModal} : Props ) {
         type: typeValue,
         price: priceValue,
     }
+
+    async function reloadApp () {
+        await Updates.reloadAsync();
+    }    
     
     function handlePost(){
+        //NativeModules.DevSettings.reload();
+        
         closeModal();
         sendEditProduct(id, dataToSent);
     }    
 
+    function handleCancel(){
+        closeModal();
+    }
+
     return (
     <Container>
         <ContainerPostCreation>
-            {/* <Question>What's on your mind?</Question> */}
 
-            <Label>Title</Label>
-            <TitleWrap>
-                <TitleInput placeholder="Type your post title here" onChangeText={setTitleValue}>{titleValue}</TitleInput>
-            </TitleWrap>
 
-            <Label>Content</Label>
-            <ContentWrap>
-                <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setTypeValue}>{typeValue}</ContentInput>
-            </ContentWrap>
+            <Body>
+                <Header>
+                    <TitleHeader>Editar Produto</TitleHeader>
+                    <Divider></Divider>
+                </Header>
+                {/* <Question>What's on your mind?</Question> */}
+
+
+
+                <ContentWrap>
+                    <Label>Title</Label>
+                    <ContentInput placeholder="Type your post title here" onChangeText={setTitleValue}>{title}</ContentInput>
+                </ContentWrap>
+
+                <ContentWrap>
+                    <Label>Type</Label>
+                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setTypeValue}>{type}</ContentInput>
+                </ContentWrap>
+
+                <ContentWrap>
+                    <Label>Price</Label>
+                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setTypeValue}>R$ {price}</ContentInput>
+                </ContentWrap>
+            </Body>
 
             <Footer>
-                <Button onPress={() => handlePost()}>
-                    <ButtonText>Editar</ButtonText>
+                <Button onPress={() => handlePost()} colorBackground='#6558F5'  style={{ borderWidth: 1, marginRight: 10}}>
+                    <ButtonText colorText='white'>Editar</ButtonText>
+                </Button>
+
+                <Button onPress={() => handleCancel()} colorBackground='' style={{ borderWidth: 1}}>
+                    <ButtonText colorText='black'>Cancelar</ButtonText>
                 </Button>
             </Footer>
-        </ContainerPostCreation>
+
+            </ContainerPostCreation>
+       
+
     </Container>
   );
 }

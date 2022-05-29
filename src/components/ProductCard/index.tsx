@@ -146,15 +146,21 @@ export function ProductCard({ data }: data) {
 
   const handleModalEditOpen = () => {  
     setVisibleEditModal(true);
-    console.log("modal aberto") 
+
   };
 
   function handleModalEditClose() {
+    
     setVisibleEditModal(false);
   }
 
-  const handleModalDeleteOpen = () => {  setVisibleDeleteModal(true) }  
-  const handleModalDeleteClose = () => {  setVisibleDeleteModal(false) }
+  function handleModalDeleteOpen() {
+    setVisibleDeleteModal(true);
+  }
+
+  function handleModalDeleteClose() {
+    setVisibleDeleteModal(false);
+  }
 
   return (
     <EditButton onPress={handleModalEditOpen}>
@@ -206,13 +212,13 @@ export function ProductCard({ data }: data) {
 
         <WrapOptionsPrice>
           <WrapOptions>
-              {/* 
               <DeleteButton onPress={handleModalDeleteOpen}>
-              <DeleteIcon name="trash-bin" size={20} color="white" />
+                <DeleteIcon name="md-trash-sharp" size={20} color="red" />
               </DeleteButton>
+
               <Modal visible={visibleDeleteModal} transparent>
-              <DeleteProduct id={id} closeModal={handleModalDeleteClose} />
-              </Modal> */}
+                <DeleteProduct id={data.id} closeModal={handleModalDeleteClose} />
+              </Modal>
           </WrapOptions>
           <Price>R$ {data.price}</Price>
         </WrapOptionsPrice>

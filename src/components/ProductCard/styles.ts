@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-import { FontAwesome5, Octicons } from "@expo/vector-icons";
+import { FontAwesome5, Ionicons, Octicons } from "@expo/vector-icons";
 
 import { RFValue } from "react-native-responsive-fontsize";
 import { BorderlessButton, TouchableOpacity } from 'react-native-gesture-handler';
@@ -100,9 +100,9 @@ export const WrapOptionsPrice = styled.View`
 
 export const WrapOptions = styled.View``;
 
-export const DeleteButton = styled.View``;
+export const DeleteButton = styled.TouchableOpacity``;
 
-export const DeleteIcon = styled.View``;
+export const DeleteIcon = styled(Ionicons)``;
 
 export const Options = styled.View``;
 

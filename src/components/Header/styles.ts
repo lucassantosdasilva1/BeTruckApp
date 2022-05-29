@@ -10,5 +10,9 @@ export const Container = styled.View`
 
   align-items: center;
   justify-content: center;
+`;
 
+export const Logo = styled.Image`
+  width: 167px;
+  height: 85px;
 `;

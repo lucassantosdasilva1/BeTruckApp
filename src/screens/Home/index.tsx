@@ -8,19 +8,13 @@ import { Container } from "./styles";
 import { DTO, getProducts } from "../../services";
 
 export function Home() {
-  const [products, setProducts] = useState<DTO[]>([]);
+  const [products, setProducts] = useState<DTO[] | undefined>([]);
 
   async function setProduct() {
-    try {
-      const {data} = await getProducts();
-      setProducts(data);
-      console.log(data);
-
-    } catch (error) {
-      console.error(error);
-    }
+    const data = await getProducts();
+    setProducts(data);
   }
-  
+
   useEffect(() => {
     setProduct();
   },[])
