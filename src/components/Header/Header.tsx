@@ -9,7 +9,7 @@ export function Header(){
     return (
         <Container>
             <View>
-                <Text category='h6' >BeTruckAPP</Text>
+                <Text category='h6' appearance='alternative'>BeTruckAPP</Text>
             </View>
         </Container>
     )

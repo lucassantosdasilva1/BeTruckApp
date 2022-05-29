@@ -14,5 +14,5 @@ export const Container = styled.View`
   align-items: center;
   padding: 0 4px;
 
-  background-color: ${({theme}) => theme.colors.background_secondary};
+  background-color: ${({theme}) => theme.colors.title};
 `;

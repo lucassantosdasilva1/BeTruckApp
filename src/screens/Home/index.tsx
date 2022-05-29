@@ -1,88 +1,41 @@
-import React from 'react';
-import { Button, Layout, Text } from '@ui-kitten/components';
-import { Header } from '../../components/Header/Header';
-import { ProductCard } from '../../components/ProductCard';
+import React, { useEffect, useState } from "react";
+import {FlatList} from 'react-native'
+import { Button, Layout, Text } from "@ui-kitten/components";
+import { Header } from "../../components/Header/Header";
+import { ProductCard } from "../../components/ProductCard";
 
-import {
-  Container
-} from './styles';
+import { Container } from "./styles";
+import { DTO, getProducts } from "../../services";
 
 export function Home() {
+  const [products, setProducts] = useState<DTO[]>([]);
+
+  async function setProduct() {
+    try {
+      const {data} = await getProducts();
+      setProducts(data);
+      console.log(data);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  useEffect(() => {
+    setProduct();
+  },[])
+
   return (
     <Layout>
-        <Container>
-            <Header/>
-            
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-            <ProductCard/>
-        </Container>
+      <Container>
+        <Header />
+        <FlatList 
+        showsVerticalScrollIndicator={false}
+        style={{width: '100%'}}
+        data={products} 
+        keyExtractor={(item, index) => index.toString()} 
+        renderItem={({item}) => <ProductCard data={item}/>} />
+      </Container>
     </Layout>
   );
 }
-/*
-
-
-
-const Footer = (props) => (
-  <View {...props} style={[props.style, styles.footerContainer]}>
-    <Button
-      style={styles.footerControl}
-      size='small'
-      status='basic'>
-      CANCEL
-    </Button>
-    <Button
-      style={styles.footerControl}
-      size='small'>
-      ACCEPT
-    </Button>
-  </View>
-);
-
-export const CardAccessoriesShowcase = () => (
-  <React.Fragment>
-    <Layout style={styles.topContainer} level='1'>
-
-      <Card style={styles.card} header={Header}>
-        <Text>With Header</Text>
-      </Card>
-
-      <Card style={styles.card} footer={Footer}>
-        <Text>With Footer</Text>
-      </Card>
-
-    </Layout>
-
-    <Card style={styles.card} header={Header} footer={Footer}>
-      <Text>
-        The Maldives, officially the Republic of Maldives, is a small country in South Asia, located in the Arabian Sea
-        of the Indian Ocean. It lies southwest of Sri Lanka and India, about 1,000 kilometres (620 mi) from the Asian
-        continent
-      </Text>
-    </Card>
-
-  </React.Fragment>
-);
-
-const styles = StyleSheet.create({
-  topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  card: {
-    flex: 1,
-    margin: 2,
-  },
-  footerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  footerControl: {
-    marginHorizontal: 2,
-  },
-});*/
