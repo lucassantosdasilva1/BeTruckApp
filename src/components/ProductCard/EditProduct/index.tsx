@@ -35,12 +35,12 @@ interface Props {
 export function EditProduct({ id, title, type, price, closeModal} : Props ) {
     const [titleValue, setTitleValue] = useState(title);
     const [typeValue, setTypeValue] = useState(type);
-    const [priceValue, setPriceValue] = useState(price);
+    const [priceValue, setPriceValue] = useState(price.toString());
     
     let dataToSent : EditProps = {
         title: titleValue,
         type: typeValue,
-        price: priceValue,
+        price: Number(priceValue),
     }
 
     async function reloadApp () {
@@ -61,7 +61,6 @@ export function EditProduct({ id, title, type, price, closeModal} : Props ) {
     return (
     <Container>
         <ContainerPostCreation>
-
 
             <Body>
                 <Header>
@@ -84,7 +83,7 @@ export function EditProduct({ id, title, type, price, closeModal} : Props ) {
 
                 <ContentWrap>
                     <Label>Price</Label>
-                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setTypeValue}>R$ {price}</ContentInput>
+                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setPriceValue}>R$ {price}</ContentInput>
                 </ContentWrap>
             </Body>
 
