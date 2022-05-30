@@ -6,13 +6,23 @@ import { ProductCard } from "../../components/ProductCard";
 
 import { Container } from "./styles";
 import { DTO, getProducts } from "../../services";
+import { Loading } from "../../components/Loading";
 
 export function Home() {
+
   const [products, setProducts] = useState<DTO[] | undefined>([]);
+  const [isLoading, setisLoading] = useState(true);
 
   async function setProduct() {
-    const data = await getProducts();
-    setProducts(data);
+    try {
+      const data = await getProducts().then();  
+      setProducts(data);
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setisLoading(false);
+    }
+    
   }
 
   useEffect(() => {
@@ -23,12 +33,15 @@ export function Home() {
     <Layout>
       <Container>
         <Header />
-        <FlatList 
-        showsVerticalScrollIndicator={false}
-        style={{width: '100%'}}
-        data={products} 
-        keyExtractor={(item, index) => index.toString()} 
-        renderItem={({item}) => <ProductCard data={item}/>} />
+        { isLoading ? <Loading/> :
+              <FlatList 
+              showsVerticalScrollIndicator={false}
+              style={{width: '100%'}}
+              data={products} 
+              keyExtractor={(item, index) => index.toString()} 
+              renderItem={({item}) => <ProductCard data={item}/>} />
+        }
+       
       </Container>
     </Layout>
   );

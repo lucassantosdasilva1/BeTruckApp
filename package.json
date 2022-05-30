@@ -12,6 +12,7 @@
     "@eva-design/eva": "^2.1.1",
     "@expo-google-fonts/roboto": "^0.2.2",
     "@expo/vector-icons": "^13.0.0",
+    "@reduxjs/toolkit": "^1.8.2",
     "@ui-kitten/components": "^5.1.2",
     "@ui-kitten/eva-icons": "^5.1.2",
     "axios": "^0.27.2",
