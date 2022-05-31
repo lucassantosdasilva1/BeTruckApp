@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import * as Updates from 'expo-updates';
 import { NativeModules } from "react-native";
 
-import { EditProps, sendEditProduct } from '../../../services';
+import { EditProps, getProducts, sendEditProduct } from '../../../services';
 
 // import { Question } from '../CreatePost/styles';
 
@@ -23,6 +23,8 @@ import {
   Button,
   ButtonText,
 } from './styles';
+import { useDispatch } from 'react-redux';
+import { setDataAction } from '../../../redux/dataSlice';
 
 interface Props {
     id: number,
@@ -35,23 +37,22 @@ interface Props {
 export function EditProduct({ id, title, type, price, closeModal} : Props ) {
     const [titleValue, setTitleValue] = useState(title);
     const [typeValue, setTypeValue] = useState(type);
-    const [priceValue, setPriceValue] = useState(price);
+    const [priceValue, setPriceValue] = useState(price.toString());
     
     let dataToSent : EditProps = {
         title: titleValue,
         type: typeValue,
-        price: priceValue,
+        price: Number(priceValue),
     }
 
     async function reloadApp () {
         await Updates.reloadAsync();
     }    
     
-    function handlePost(){
+    async function handlePost(){
         //NativeModules.DevSettings.reload();
-        
         closeModal();
-        sendEditProduct(id, dataToSent);
+        await sendEditProduct(id, dataToSent);
     }    
 
     function handleCancel(){
@@ -84,7 +85,7 @@ export function EditProduct({ id, title, type, price, closeModal} : Props ) {
 
                 <ContentWrap>
                     <Label>Price</Label>
-                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setTypeValue}>R$ {price}</ContentInput>
+                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setPriceValue}>R$ {price}</ContentInput>
                 </ContentWrap>
             </Body>
 

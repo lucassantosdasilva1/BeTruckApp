@@ -7,7 +7,7 @@ export function Loading() {
     const theme = useTheme();
   return (
     <ActivityIndicator
-        color={theme.colors.text}
+        color='white'
         size="large"
         style={{ flex: 1}}
     />

@@ -1,5 +1,5 @@
-import { DTOsemid, postProducts } from ".";
-import { arrayProducts } from "../services/products";
+import { DTOsemid, postProducts } from "../services/index";
+import { arrayProducts } from "./products";
 
 export async function AdicionaProdutos() {
   function jsonToArray(json) {
@@ -21,8 +21,3 @@ export async function AdicionaProdutos() {
      
   });
 }
-// };
-
-// function rollCall(name, index) {
-//     console.log(`Is the number ${index + 1} student - ${name} present? Yes!`)
-//     ;}

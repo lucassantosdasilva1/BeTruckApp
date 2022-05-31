@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { EditProduct } from "./EditProduct";
 import { DeleteProduct } from "./DeleteProduct";
@@ -26,12 +26,20 @@ import {
 
 import { DTO, getProducts } from "../../services";
 import { Modal } from "react-native";
+import {
+  differenceInDays,
+  differenceInMinutes,
+  minutesToHours,
+} from "date-fns";
+import { useDispatch } from "react-redux";
+import { setDataAction } from "../../redux/dataSlice";
 
 interface data {
-  data: DTO;
+  dataOfApi: DTO;
+  gateFunc: () => void;
 }
 
-export function getImage(data : DTO) {
+export function getImage(data: DTO) {
   switch (data.filename) {
     case "0.jpg":
       return require("../../assets/0.jpg");
@@ -136,21 +144,53 @@ export function getImage(data : DTO) {
     case "50.jpg":
       return require("../../assets/50.jpg");
   }
-};
+}
 
-export function ProductCard({ data }: data) {
+export function ProductCard({ dataOfApi }: data) {
   const [rating, setRating] = useState([1, 2, 3, 4, 5]);
-  
-  const [visibleEditModal, setVisibleEditModal] = useState(false)
+  const [timeAgo, setTimeAgo] = useState(Number);
+  const [wordOfAgo, setWordOfAgo] = useState(String);
+
+  const [visibleEditModal, setVisibleEditModal] = useState(false);
   const [visibleDeleteModal, setVisibleDeleteModal] = useState(false);
 
-  const handleModalEditOpen = () => {  
-    setVisibleEditModal(true);
+  const [data, setData] = useState(dataOfApi);
+  
+  const dispatch = useDispatch();
 
-  };
+  //function to receive timestamp and return time ago in days or hours or minutes
+  function calculateHoursAgo() {
+    const dateOfPost = new Date(data.created_at);
 
-  function handleModalEditClose() {
+    const today = new Date();
+
+    const hojeparsed = Date.parse(today.toString());
+
+    const result = differenceInMinutes(hojeparsed, dateOfPost);
+
+    switch (true) {
+      case result >= 1 && result < 60:
+        setWordOfAgo("minutes ago");
+        setTimeAgo(result);
+        break;
+      case result >= 60 && result < 1440:
+        setWordOfAgo("hours ago");
+        const hours = minutesToHours(result);
+        setTimeAgo(hours);
+        break;
+      case result >= 1440:
+        setWordOfAgo("days ago");
+        const days = differenceInDays(hojeparsed, dateOfPost);
+        setTimeAgo(days);
+        break;
+      }
+    }
     
+    const handleModalEditOpen = () => {
+      setVisibleEditModal(true);
+    };
+    
+  function handleModalEditClose() {
     setVisibleEditModal(false);
   }
 
@@ -162,18 +202,21 @@ export function ProductCard({ data }: data) {
     setVisibleDeleteModal(false);
   }
 
+  useEffect(() => {
+    calculateHoursAgo();
+  }, []);
+
   return (
     <EditButton onPress={handleModalEditOpen}>
-       
-       <Modal visible={visibleEditModal} transparent>
-         <EditProduct 
+      <Modal visible={visibleEditModal} transparent>
+        <EditProduct
           closeModal={handleModalEditClose}
           id={data.id}
           title={data.title}
           type={data.type}
           price={data.price}
-         />
-       </Modal>
+        />
+      </Modal>
 
       <Container>
         <WrapPhoto>
@@ -183,8 +226,8 @@ export function ProductCard({ data }: data) {
         <WrapInfos>
           <WrapTitlesType>
             <Title>
-              {data.title.substring(0, 20)}
-              {data.title.length > 20 ? "..." : ""}
+              {data.title.substring(0, 15)}
+              {data.title.length > 15 ? "..." : ""}
             </Title>
             <Type>{data.type}</Type>
           </WrapTitlesType>
@@ -212,17 +255,21 @@ export function ProductCard({ data }: data) {
 
         <WrapOptionsPrice>
           <WrapOptions>
-              <DeleteButton onPress={handleModalDeleteOpen}>
-                <DeleteIcon name="md-trash-sharp" size={20} color="red" />
-              </DeleteButton>
+            <DeleteButton onPress={handleModalDeleteOpen}>
+              <DeleteIcon name="md-trash-sharp" size={20} color="red" />
+            </DeleteButton>
 
-              <Modal visible={visibleDeleteModal} transparent>
-                <DeleteProduct id={data.id} closeModal={handleModalDeleteClose} />
-              </Modal>
+            <Modal visible={visibleDeleteModal} transparent>
+              <DeleteProduct id={data.id} closeModal={handleModalDeleteClose} />
+            </Modal>
           </WrapOptions>
           <Price>R$ {data.price}</Price>
         </WrapOptionsPrice>
       </Container>
+
+      {/* <CreatedAt>
+
+      </CreatedAt> */}
     </EditButton>
   );
 }
