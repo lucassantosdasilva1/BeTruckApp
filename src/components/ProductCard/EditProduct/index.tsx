@@ -38,6 +38,8 @@ export function EditProduct({ id, title, type, price, closeModal} : Props ) {
     const [titleValue, setTitleValue] = useState(title);
     const [typeValue, setTypeValue] = useState(type);
     const [priceValue, setPriceValue] = useState(price.toString());
+
+    console.log("priceValue", priceValue);
     
     let dataToSent : EditProps = {
         title: titleValue,
@@ -84,7 +86,7 @@ export function EditProduct({ id, title, type, price, closeModal} : Props ) {
 
                 <ContentWrap>
                     <Label>Price</Label>
-                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setPriceValue}>R$ {price}</ContentInput>
+                    <ContentInput placeholder="Content here" textAlignVertical="top" multiline onChangeText={setPriceValue}>{price}</ContentInput>
                 </ContentWrap>
             </Body>
 

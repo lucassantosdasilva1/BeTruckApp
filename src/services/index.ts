@@ -42,11 +42,24 @@ export async function postProducts(data: DTOsemid) {
 }
 
 export async function getProducts() {
-  console.log('passou aqui no get');
   try {
     const result = await api.get("/products");
-    console.log(result.status);
-    return result.data;
+
+
+    const resultSorted : DTO[] = result.data;
+
+    resultSorted.sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+        // a must be equal to b
+          return 0;
+    })
+
+    return resultSorted;
   } catch (error) {
     console.error(error);
   }

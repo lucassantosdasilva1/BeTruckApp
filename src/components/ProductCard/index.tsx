@@ -188,9 +188,9 @@ export function ProductCard({ dataOfApi }: data) {
       }
     }
     
-    const handleModalEditOpen = () => {
-      setVisibleEditModal(true);
-    };
+  const handleModalEditOpen = () => {
+    setVisibleEditModal(true);
+  };
     
   function handleModalEditClose() {
     setVisibleEditModal(false);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
-import { Layout } from "@ui-kitten/components";
+import { FlatList, RefreshControl } from "react-native";
+import { Layout, Spinner } from "@ui-kitten/components";
 
 import { Header } from "../../components/Header/Header";
 import { ProductCard } from "../../components/ProductCard";
@@ -16,24 +16,32 @@ import { useSelector } from "react-redux";
 import { Container } from "./styles";
 
 export function Home() {
-//  const [products, setProducts] = useState<DTO[] | undefined>([]);
-  const [isLoading, setisLoading] = useState(false);
+  const [products, setProducts] = useState<DTO[] | undefined>([]);
+  const [isLoading, setisLoading] = useState(true);
   const [gate, setGate] = useState("false");
 
-  
   const dispatch = useDispatch();
 
-  const data : DTO[] = useSelector(
+  const dataStore: DTO[] = useSelector(
     (state: RootState) => state.reducersList.dataSliceReducer.data
   );
 
   async function setProduct() {
-    console.log("setProduct");
-    const data = await getProducts();
+    try {
+      var data = await getProducts();
+      dispatch(setDataAction(data));
+    
+      console.log("products: ", products);
+    } catch (error) {
 
-  //  setProducts(data);
-    dispatch(setDataAction(data));
-  } 
+      console.error(error);
+
+    } finally {
+      setProducts(data);
+      setisLoading(false);
+
+    }
+  }
 
   function handleRefresh() {
     setGate("");
@@ -48,15 +56,38 @@ export function Home() {
     <Layout>
       <Container>
         <Header />
+
         {isLoading ? (
-          <Loading />
-        ) : (
+
+          <Layout
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "transparent",
+            }}
+          >
+
+            <Spinner status="basic" />
+          </Layout>
+
+        ) 
+        
+        : 
+        
+        (
           <FlatList
             showsVerticalScrollIndicator={false}
             style={{ width: "100%" }}
-            data={data}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => <ProductCard dataOfApi={item} gateFunc={handleRefresh}/>}
+            data={products}
+            keyExtractor={(item, index) => item.id.toString()}
+            renderItem={({ item }) => (
+              <ProductCard dataOfApi={item} gateFunc={handleRefresh} />
+            )}
+            refreshControl={
+              <RefreshControl refreshing={isLoading} onRefresh={setProduct} />
+            }
+
           />
         )}
       </Container>

@@ -1,16 +1,21 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, } from 'react-native';
 import { Text } from '@ui-kitten/components';
 
-import { Container, Logo } from './styles';
+import { ButtonReload, Container, Logo, Icon, WrapAll } from './styles';
 
+import RestartType  from 'react-native-restart';
 
-export function Header(){
+//<ButtonReload><Icon name="reload1" size={24} color="white" /></ButtonReload>
+
+export function Header() {
+
     return (
         <Container>
-            <View>
-                <Logo source={require('../../assets/betrucklogo.png')}/>
-            </View>
+            <WrapAll>
+                <Logo source={require('../../assets/betrucklogo.png')} />
+                
+            </WrapAll>
         </Container>
     )
 };
