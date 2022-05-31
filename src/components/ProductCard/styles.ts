@@ -13,13 +13,32 @@ export const Container = styled.View`
   background-color: #ffff;
   flex-direction: row;
   margin-top: 10px;
-  margin-bottom: 5px;
-  margin-right: 10px;
 
   padding: 10px;
 
-  border-width: 2px;
+  border-top-width: 1px;
   border-color: ${({ theme }) => theme.colors.line};
+`;
+
+export const CreatedAt = styled.View`
+  height: 17px;
+  padding-right: 10px;
+
+  width: 100%;
+
+  background-color: #ffff;
+
+  flex-direction: row;
+  justify-content: flex-end;
+
+`;
+
+export const CreatedAtText = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.primary_700};
+  font-size: ${RFValue(10)}px;
+  color: ${({ theme }) => theme.colors.title};
+
+  font-style: italic;
 `;
 
 export const WrapPhoto = styled.View`
@@ -111,3 +130,4 @@ export const Price = styled.Text`
   font-size: ${RFValue(16)}px;
   color: ${({ theme }) => theme.colors.title};
 `;
+

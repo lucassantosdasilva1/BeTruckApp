@@ -22,6 +22,8 @@ import {
   DeleteButton,
   DeleteIcon,
   Price,
+  CreatedAt,
+  CreatedAtText
 } from "./styles";
 
 import { DTO, getProducts } from "../../services";
@@ -267,9 +269,11 @@ export function ProductCard({ dataOfApi }: data) {
         </WrapOptionsPrice>
       </Container>
 
-      {/* <CreatedAt>
+      <CreatedAt>
+          <CreatedAtText>Created at {timeAgo} {wordOfAgo}</CreatedAtText>
+      </CreatedAt>
 
-      </CreatedAt> */}
+  
     </EditButton>
   );
 }

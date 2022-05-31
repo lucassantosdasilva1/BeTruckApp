@@ -63,7 +63,6 @@ export function EditProduct({ id, title, type, price, closeModal} : Props ) {
     <Container>
         <ContainerPostCreation>
 
-
             <Body>
                 <Header>
                     <TitleHeader>Editar Produto</TitleHeader>
