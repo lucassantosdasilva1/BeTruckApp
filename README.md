@@ -16,7 +16,6 @@
  <a href="#-funcionalidades">Funcionalidades</a> •
  <a href="#-como-executar-o-projeto">Como executar</a> • 
  <a href="#-tecnologias">Tecnologias</a> • 
- <a href="#-contribuidores">Contribuidores</a> • 
  <a href="#-autor">Autor</a> • 
  <a href="#user-content--licença">Licença</a>
 </p>
@@ -50,26 +49,24 @@ Este projeto é divido em duas partes:
 1. Backend (pasta server) 
 2. Mobile (pasta mobile)
 
-💡O Mobile precisa que o Backend esteja sendo executado para funcionar.
+💡O Mobile precisa que o Backend esteja sendo executado para funcionar (No nosso caso está hospedado no heroku e não precisará se incomodar).
 
 ### Pré-requisitos
 
-Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
-Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+Antes de começar, você vai precisar ter instalado e acessar a playstore pára baixar o expo go. 
+
 
 #### 🎲 Utilizando o Backend (servidor)
 
 O servidor está hospedado no Heroku pode ser acessado clicando [aqui](https://api-betruck.herokuapp.com/)
 
-A [Documentação da API](https://api-betruck.herokuapp.com/swagger-ui.html) foi produzida utlizando conceito [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) na sua mais nova versão (v3)
-
-
-
+A [Documentação da API](https://api-betruck.herokuapp.com/swagger-ui.html) foi produzida utlizando conceito [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) na sua mais nova versão [(v3)](https://github.com/OAI/OpenAPI-Specification)
 
 
 #### 🧭 Rodando a aplicação Mobile 
-- Acessar o expo e visualizar o app online.
+- Acessar o [link](https://expo.dev/@lucassantosdasilva1/BETRUCKAPP) expo e visualizar o QRcode do app online. 
+
+- Após ler o QRcode ele vai abrir automaticamente o expo go em seu smartphone com o app em funcionamento
 
 
 ## 🛠 Tecnologias
@@ -115,6 +112,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 Este projeto esta sobe a licença [MIT](./LICENSE).
 
-Feito com ❤️ por Thiago Marinho 👋🏽 [Entre em contato!](https://www.linkedin.com/in/tgmarinho/)
+Feito com ❤️ por Lucas Santos 👋🏽 [Entre em contato!](https://www.linkedin.com/in/lucas-santos-758084112)
 
 ---

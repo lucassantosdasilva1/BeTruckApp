@@ -13,6 +13,7 @@
     "android": {
       "package": "com.betruck.betruckapp",
       "versionCode": 1
-    }
+    },
+    "description": ""
   }
 }
