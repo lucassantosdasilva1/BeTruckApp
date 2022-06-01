@@ -47,7 +47,7 @@ Projeto desenvolvido durante a avaliação para o teste de Desenvolvedor React N
 
 Este projeto é divido em duas partes:
 1. Backend (pasta server) 
-2. Mobile (pasta mobile)
+2. [Mobile](https://github.com/lucassantosdasilva1/BeTruckApp) ([link](https://github.com/lucassantosdasilva1/BeTruckApp)do github)
 
 💡O Mobile precisa que o Backend esteja sendo executado para funcionar (No nosso caso está hospedado no heroku e não precisará se incomodar).
 
